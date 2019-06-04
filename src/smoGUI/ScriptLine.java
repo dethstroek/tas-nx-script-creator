@@ -2,19 +2,19 @@ package smoGUI;
 
 public class ScriptLine {
 
-	String frame;
+	int frame;
 	boolean[] buttonFlag = new boolean[17];
 	int coordX_L, coordY_L, coordX_R, coordY_R;
 
-	public String getFrame() {
+	public int getFrame() {
 		return frame;
 	}
 
-	public void setFrame(String frame) {
+	public void setFrame(int frame) {
 		this.frame = frame;
 	}
 
-	public ScriptLine(String frame, boolean aPress, boolean bPress, boolean xPress, boolean yPress, boolean zlPress,
+	public ScriptLine(int frame, boolean aPress, boolean bPress, boolean xPress, boolean yPress, boolean zlPress,
 			boolean zrPress, boolean lPress, boolean rPress, boolean upPress, boolean leftPress, boolean downPress,
 			boolean rightPress, boolean plusPress, boolean minusPress, boolean lStickPress, boolean rStickPress,
 			int coordX_L, int coordY_L, int coordX_R, int coordY_R) {
@@ -55,7 +55,6 @@ public class ScriptLine {
 				keyCount++;
 		}
 		if (keyCount != 0) {
-			boolean runOnce = false;
 			for (int i = 0; i < buttonFlag.length; i++) {
 				if (buttonFlag[i] == true) {
 					switch(i) {
@@ -107,49 +106,49 @@ public class ScriptLine {
 							outputString += ";";
 						}
 						break;
-					case 9: // UP is pressed
+					case 8: // UP is pressed
 						outputString += "KEY_DUP";
 						if (keyCount > 1) {
 							outputString += ";";
 						}
 						break;
-					case 10:// LEFT is pressed
+					case 9:// LEFT is pressed
 						outputString += "KEY_DLEFT";
 						if (keyCount > 1) {
 							outputString += ";";
 						}
 						break;
-					case 11:// DOWN is pressed
+					case 10:// DOWN is pressed
 						outputString += "KEY_DDOWN";
 						if (keyCount > 1) {
 							outputString += ";";
 						}
 						break;
-					case 12:// RIGHT is pressed
+					case 11:// RIGHT is pressed
 						outputString += "KEY_DRIGHT";
 						if (keyCount > 1) {
 							outputString += ";";
 						}
 						break;
-					case 13:// PLUS is pressed
+					case 12:// PLUS is pressed
 						outputString += "KEY_PLUS";
 						if (keyCount > 1) {
 							outputString += ";";
 						}
 						break;
-					case 14:// MINUS is pressed
+					case 13:// MINUS is pressed
 						outputString += "KEY_MINUS";
 						if (keyCount > 1) {
 							outputString += ";";
 						}
 						break;
-					case 15:// LSTICK is pressed
+					case 14:// LSTICK is pressed
 						outputString += "KEY_LSTICK";
 						if (keyCount > 1) {
 							outputString += ";";
 						}
 						break;
-					case 16:// RSTICK is pressed
+					case 15:// RSTICK is pressed
 						outputString += "KEY_RSTICK";
 						if (keyCount > 1) {
 							outputString += ";";
