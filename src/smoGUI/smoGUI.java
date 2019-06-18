@@ -23,8 +23,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 public class smoGUI {
-	
-	
+
 	private JFrame frmTasGui;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JSpinner frameSelect;
@@ -43,7 +42,7 @@ public class smoGUI {
 	int lastFrameEntered;
 	private JSpinner frameDelete;
 	private JSpinner startShiftAt;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -71,12 +70,9 @@ public class smoGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		
-		
+
 		frmTasGui = new JFrame();
 		frmTasGui.setResizable(false);
-		frmTasGui.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\Programming\\Eclipse\\Workspace\\smoGUI\\cappyImage.png"));;
 		frmTasGui.setTitle("TAS-nx Script Generator by Dethstroek");
 		frmTasGui.setBounds(100, 100, 1000, 555);
 		frmTasGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -141,7 +137,7 @@ public class smoGUI {
 		JToggleButton Key_RSTICK = new JToggleButton("RSTICK");
 		Key_RSTICK.setBounds(102, 248, 86, 23);
 		frmTasGui.getContentPane().add(Key_RSTICK);
-		
+
 		JToggleButton Key_LSTICK = new JToggleButton("LSTICK");
 		Key_LSTICK.setBounds(10, 248, 82, 23);
 		frmTasGui.getContentPane().add(Key_LSTICK);
@@ -317,10 +313,10 @@ public class smoGUI {
 		frmTasGui.getContentPane().add(shiftFrames);
 
 		JButton shiftCommit = new JButton("OK");
-		
+
 		shiftCommit.setBounds(397, 78, 61, 23);
 		frmTasGui.getContentPane().add(shiftCommit);
-		
+
 		JButton resetButtons = new JButton("RESET BUTTONS");
 		resetButtons.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -345,40 +341,40 @@ public class smoGUI {
 		resetButtons.setToolTipText("Will reset all the buttons on the GUI");
 		resetButtons.setBounds(10, 384, 178, 23);
 		frmTasGui.getContentPane().add(resetButtons);
-		
+
 		JButton resetScripts = new JButton("RESET SCRIPTS");
 		resetScripts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				scriptLines.removeAll(scriptLines);
-				
+
 				scriptDisplay.setText(null);
 				scriptLines = cleanForPrint(scriptLines);
 				for (ScriptLine s : scriptLines) {
 					scriptDisplay.append(s + "\n");
 				}
-				
-			}			
+
+			}
 		});
 		resetScripts.setToolTipText("Will clear all the scripts out of the list");
 		resetScripts.setBounds(10, 417, 178, 23);
 		frmTasGui.getContentPane().add(resetScripts);
-		
+
 		JLabel deleteLabel = new JLabel("Delete Frame:");
 		deleteLabel.setBounds(201, 162, 148, 14);
 		frmTasGui.getContentPane().add(deleteLabel);
-		
+
 		frameDelete = new JSpinner();
 		frameDelete.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		frameDelete.setToolTipText("Enter the frame to be deleted");
 		frameDelete.setBounds(198, 183, 95, 20);
 		frmTasGui.getContentPane().add(frameDelete);
-		
+
 		JButton deleteButton = new JButton("OK");
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int frameToDelete = (Integer)frameDelete.getValue();
-				for(int i = 0; i < scriptLines.size(); i++) {
-					if(frameToDelete == scriptLines.get(i).getFrame()) {
+				int frameToDelete = (Integer) frameDelete.getValue();
+				for (int i = 0; i < scriptLines.size(); i++) {
+					if (frameToDelete == scriptLines.get(i).getFrame()) {
 						scriptLines.remove(i);
 					}
 				}
@@ -391,7 +387,7 @@ public class smoGUI {
 		});
 		deleteButton.setBounds(301, 182, 61, 23);
 		frmTasGui.getContentPane().add(deleteButton);
-		
+
 		startShiftAt = new JSpinner();
 		startShiftAt.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		startShiftAt.setToolTipText("Number of times frame should repeat");
@@ -400,10 +396,10 @@ public class smoGUI {
 		shiftCommit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				for (ScriptLine s : scriptLines) {
-					if(s.getFrame() >= (Integer) startShiftAt.getValue()) {
+					if (s.getFrame() >= (Integer) startShiftAt.getValue()) {
 						int frame = s.getFrame();
 						frame += (Integer) shiftFrames.getValue();
-						//System.out.println(frame);
+						// System.out.println(frame);
 						s.setFrame(frame);
 					}
 				}
@@ -416,8 +412,7 @@ public class smoGUI {
 			}
 
 		});
-		
-		
+
 		JLabel startFrameShift = new JLabel("Start At:");
 		startFrameShift.setBounds(328, 61, 148, 14);
 		frmTasGui.getContentPane().add(startFrameShift);
@@ -492,7 +487,8 @@ public class smoGUI {
 				}
 
 				if ((Integer) repeatFrames.getValue() > 0) {
-					for (int i = (Integer) repeatFrames.getValue() + (Integer) frameSelect.getValue(); i > (Integer) frameSelect.getValue()- 1; i--) {
+					for (int i = (Integer) repeatFrames.getValue()
+							+ (Integer) frameSelect.getValue(); i > (Integer) frameSelect.getValue() - 1; i--) {
 						ScriptLine newScript = new ScriptLine(i, Key_A.isSelected(), Key_B.isSelected(),
 								Key_X.isSelected(), Key_Y.isSelected(), Key_ZL.isSelected(), Key_ZR.isSelected(),
 								Key_L.isSelected(), Key_R.isSelected(), Key_UP.isSelected(), Key_LEFT.isSelected(),
@@ -506,21 +502,21 @@ public class smoGUI {
 							scriptDisplay.append(s + "\n");
 						}
 					}
-					
+
 					frameSelect.setValue((Integer) repeatFrames.getValue() + (Integer) frameSelect.getValue());
-					
+
 				} else {
 					// Sends all the boolean values to the object for display
-					ScriptLine newScript = new ScriptLine((Integer) frameSelect.getValue(), Key_A.isSelected(), Key_B.isSelected(),
-							Key_X.isSelected(), Key_Y.isSelected(), Key_ZL.isSelected(), Key_ZR.isSelected(),
-							Key_L.isSelected(), Key_R.isSelected(), Key_UP.isSelected(), Key_LEFT.isSelected(),
-							Key_DOWN.isSelected(), Key_RIGHT.isSelected(), Key_PLUS.isSelected(),
+					ScriptLine newScript = new ScriptLine((Integer) frameSelect.getValue(), Key_A.isSelected(),
+							Key_B.isSelected(), Key_X.isSelected(), Key_Y.isSelected(), Key_ZL.isSelected(),
+							Key_ZR.isSelected(), Key_L.isSelected(), Key_R.isSelected(), Key_UP.isSelected(),
+							Key_LEFT.isSelected(), Key_DOWN.isSelected(), Key_RIGHT.isSelected(), Key_PLUS.isSelected(),
 							Key_MINUS.isSelected(), Key_LSTICK.isSelected(), Key_RSTICK.isSelected(), coordX_L,
 							coordY_L, coordX_R, coordY_R);
 
 					// System.out.println(newScript);
 					int frame = (Integer) frameSelect.getValue();
-					frameSelect.setValue(frame+1);
+					frameSelect.setValue(frame + 1);
 					scriptLines.add(newScript); // Adds to the list of completed lines
 				}
 				scriptDisplay.setText(null);
@@ -530,7 +526,6 @@ public class smoGUI {
 				}
 			}
 
-			
 		});
 
 		// ********************FILES IMPORTED HERE********************
@@ -551,8 +546,7 @@ public class smoGUI {
 						System.out.println(
 								importLines[0] + " " + importLines[1] + " " + importLines[2] + " " + importLines[3]);
 
-						ScriptLine newScriptLine = new ScriptLine(
-								Integer.parseInt(importLines[0]), // Frame number
+						ScriptLine newScriptLine = new ScriptLine(Integer.parseInt(importLines[0]), // Frame number
 								importLines[1].contains("KEY_A"), // If contains KEY_A
 								importLines[1].contains("KEY_B"), // If contains KEY_B
 								importLines[1].contains("KEY_X"), // If contains KEY_X
@@ -597,26 +591,88 @@ public class smoGUI {
 	}
 
 	private ArrayList<ScriptLine> cleanForPrint(ArrayList<ScriptLine> scriptLines) {
-				// Deletes duplicates in case of overriding
-				for (int i = 0; i < scriptLines.size() - 1; i++) {
-					if (scriptLines.get(i).getFrame() == scriptLines.get(scriptLines.size() - 1).getFrame()) {
-						scriptLines.remove(i);
-					}
-				}
-
-				// Resorts just in case frames added out of order
-				for (int i = 0; i < scriptLines.size() - 1; i++) {
-					for (int j = 0; j < scriptLines.size() - i - 1; j++) {
-						if (scriptLines.get(j).getFrame() > scriptLines.get(j + 1).getFrame()) {
-							ScriptLine temp = scriptLines.get(j);
-							scriptLines.set(j, scriptLines.get(j + 1));
-							scriptLines.set(j + 1, temp);
-						}
-					}
-				}
-
-				return scriptLines;
-
+		// Deletes duplicates in case of overriding
+		for (int i = 0; i < scriptLines.size() - 1; i++) {
+			if (scriptLines.get(i).getFrame() == scriptLines.get(scriptLines.size() - 1).getFrame()) {
+				scriptLines.remove(i);
 			}
-	
+		}
+		// Resorts just in case frames added out of order
+		int[] frameArr = new int[scriptLines.size()];
+
+		sort(frameArr, 0, frameArr.length - 1);
+
+		ArrayList<ScriptLine> sortedScripts = new ArrayList<ScriptLine>();
+		for (ScriptLine s : scriptLines) {
+			for (int i = 0; i < frameArr.length; i++) {
+				if (frameArr[i] == s.getFrame()) {
+					sortedScripts.add(s);
+					break;
+				}
+			}
+		}
+
+		return sortedScripts;
+
+	}
+
+	void sort(int[] frameArray, int left, int right) {
+		if (left < right) {
+			// Find middle index
+			int middle = (left + right) / 2;
+
+			// Sort the two halves of subarrays
+			sort(frameArray, left, middle);
+			sort(frameArray, middle + 1, right);
+
+			// Merge the sorted subarrays
+			merge(frameArray, left, middle, right);
+		}
+	}
+
+	void merge(int frameArray[], int left, int middle, int right) {
+		// Find sizes of two subarrays to be merged
+		int n1 = middle;
+		int n2 = right - middle;
+
+		/* Create temporary arrays */
+		int L[] = new int[n1];
+		int R[] = new int[n2];
+
+		/* Copy data to temp arrays */
+		for (int i = 0; i < n1; i++)
+			L[i] = frameArray[left + i];
+		for (int j = 0; j < n2; j++)
+			R[j] = frameArray[middle + 1 + j];
+
+		/* Merge the temporary arrays */
+		// Initial indexes of the first and second subarrays
+		int i = 0, j = 0;
+
+		// Initial index of the merged array
+		int k = left;
+		while (i < n1 && j < n2) {
+			if (L[i] <= R[j]) {
+				frameArray[k] = L[i];
+				i++;
+			} else {
+				frameArray[k] = R[j];
+				j++;
+			}
+			k++;
+		}
+
+		/* Copy remiaining elements of L[] if any */
+		while (i < n1) {
+			frameArray[k] = L[i];
+			i++;
+			k++;
+		}
+		/* Copy remaining elements of R[] if any */
+		while (j < n2) {
+			frameArray[k] = R[j];
+			j++;
+			k++;
+		}
+	}
 }
